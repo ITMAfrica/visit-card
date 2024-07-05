@@ -1,7 +1,10 @@
 :root{
-    --primary_color: #0777E9 ;
-    --secondary_color: rgb(0, 0, 0, 0.9);
-    --tertiary_color: rgba(0, 0, 0, 0.6);
+    --primaryColor: #0777E9 ;
+    --secondaryColor: rgb(0, 0, 0, 0.9);
+    --tertiaryColor: rgba(0, 0, 0, 0.6);
+    --normalSize: 14px;
+    --mediumSize: 14px;
+    --bigSize: 14px;
   } 
 
 * {
@@ -9,23 +12,57 @@
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    color: var(--secondary_color);
+    color: var(--secondaryColor);
 }
 
 body {
     width: 420px;
     height: 100%;
     margin: 0 auto;
+    background-color: #e5e5e5;
 }
 
 h1, h2, h3 {
     font-weight: 100;
 }
 
+h1 {
+    font-size: 22px;
+    margin: 2px 0;
+}
+
+h2 {
+    font-size: 18.11px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-size: 15px;
+}
+
+p, a {
+    font-size: var(--normalSize);
+}
+
+a {
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+section {
+    padding: 0 21.73px;
+    background-color:#FFFFFF;
+}
+
 header {
     border: 1px solid red;
     background: url("/images/coverPhoto.png");
-    padding: 0 21.73px;
+    background-color:#FFFFFF;
 }
 
 header > img {
@@ -37,20 +74,54 @@ header > img {
 }
 
 header h3 {
-    color: var(--tertiary_color);
+    color: var(--tertiaryColor);
+    margin-top: 10px;
 }
 
 header a {
-    background-color: var(--primary_color);
+    background-color: var(--primaryColor);
     padding: 10px 12px;
     border-radius: 29.4px;
+    display: flex;
+    align-items: center;
+}
+
+header a img {
+    margin-right: 5px;
 }
 
 header a span {
-    color: white;
+    color: #FFFFFF;
 }
 
 .headerButtons {
     display: flex;
     justify-content: space-between;
+    margin: 20px 0;
+}
+
+main section {
+    margin: 7px 0;
+    padding: 17.3px 21.73px;;
+    background-color:#FFFFFF;
+}
+
+main section p {
+    margin: 15px 0;
+}
+
+main section li {
+    margin: 27px 0;
+}
+
+main section li img {
+    margin-right: 5px;
+}
+
+main section div {
+    border: 2px solid var(--primaryColor);
+    display: flex;
+    justify-content: space-between;
+    padding: 11.29px 117px;
+    border-radius: 7.88px;
 }
