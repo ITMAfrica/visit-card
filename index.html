@@ -10,18 +10,18 @@
     <body>
         <header>
             <img class="coverPhoto" src="images/coverPhoto.png" />
-            <img class="profilePicture" src="images/profilePicture.png" />
+            <img id="picture" class="profilePicture" src="images/profilePicture.png" />
             <section>
-                <h1>Kate Elodie</h1>
-                <h2>MD RDC Head of Central Division</h2>
-                <h3>Congo Brazza, Gabon, Cameroun, Angola et Zambie</h3>
+                <h1 id="name"></h1>
+                <h2 id="position"></h2>
+                <h3 id="countryAccess"></h3>
             </section>
 
             <section class="headerButtons">
-                <a>
+                <button onclick="addContact()">
                     <img src="images/contact.png" />
                     <span>Ajouter aux contacts</span>
-                </a>
+                </button>
 
                 <a>
                     <img src="images/share.png" />
@@ -36,11 +36,7 @@
         <main>
             <section>
                 <h2>About</h2>
-                <p>
-                    Ipsum dolor meat lovers buffalo. Crust tomato Aussie green
-                    roll beef mozzarella green pie. Hawaiian beef mozzarella
-                    crust Hawaiian Hawaiian. Bianca deep pesto personal mayo
-                    garlic. Mayo mayo stuffed.
+                <p id="description">
                 </p>
                 <ul>
                     <li>
@@ -49,26 +45,32 @@
                     </li>
                     <li>
                         <img src="images/phone.png" />
-                        <a>+243979544988</a>
+                        <a id="phoneNumber">+243979544988</a>
                     </li>
                     <li>
                         <img src="images/building.png" />
-                        <a>+243979544988</a>
+                        <a id="professionalPhoneNumber"></a>
                     </li>
                     <li>
                         <img src="images/email.png" />
-                        <a>precieuxmudibu@itmafrica.com</a>
+                        <a id="professionalEmail"></a>
                     </li>
                     <li>
                         <img src="images/localisation.png" />
-                        <span>8 Maniema, Kintambo</span>
+                        <span id="address"></span>
                     </li>
                 </ul>
 
                 <div>
-                    <img src="images/linkedin.png" />
-                    <img src="images/instagram.png" />
-                    <img src="images/facebook.png" />
+                    <a target="_blank" id="linkedin" href="">
+                        <img src="images/linkedin.png" />
+                    </a>
+                    <a target="_blank" id="instagram" href="">
+                        <img src="images/instagram.png" />
+                    </a>
+                    <a target="_blank" id="facebook" href="">
+                        <img src="images/facebook.png" />
+                    </a>
                 </div>
             </section>
 

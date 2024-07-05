@@ -1,146 +1,93 @@
-const moves = document.getElementById("moves-count");
-const timeValue = document.getElementById("time");
-const startButton = document.getElementById("start");
-const stopButton = document.getElementById("stop");
-const gameContainer = document.querySelector(".game-container");
-const result = document.getElementById("result");
-const controls = document.querySelector(".controls-container");
-let cards;
-let interval;
-let firstCard = false;
-let secondCard = false;
+const defaultImage = 'images/profilePicture.png';
 
-let seconds = 0,
-    minutes = 0;
+const getUserInKaziPro = async id => {
+    return {
+        name: 'Precieux',
+        firstName: 'Precieux',
+        lastName: 'Mudibu',
+        position: 'Web developer',
+        countryAccess:
+            'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie',
+        description: 'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie',
+        phoneNumber: '+243 979544988',
+        professionalPhoneNumber: '+243 979544988',
+        professionalEmail: 'precieuxmudibu@itmafrica.com',
+        address: '8 Maniema, Kintambo',
+        instagram: 'www.itmafrica.com',
+        linkedin: 'www.itmafrica.com',
+        facebook: 'www.itmafrica.com',
+        picture: defaultImage,
+        address: '8 Maniema, Kintambo',
+        description:
+            ' Ipsum dolor meat lovers buffalo. Crust tomato Aussie greenroll beef mozzarella green pie. Hawaiian beef mozzarella crust Hawaiian Hawaiian. Bianca deep pesto personal mayo garlic. Mayo mayo stuffed.'
+    };
+};
 
-let movesCount = 0,
-    winCount = 0;
+const addContact = () => {
+    // Vérifier si la fonctionnalité d'ajout de contact est disponible
+    if (navigator.contacts && navigator.contacts.create) {
+        // Créer un nouvel objet contact
+        var contact = new Contact();
+        contact.name = { givenName: 'Prénom', familyName: 'Nom' }; // Remplacer par les valeurs réelles
+        contact.email = 'exemple@email.com'; // Remplacer par l'adresse e-mail réelle
+        contact.phoneNumbers = [{ type: 'mobile', value: '+33123456789' }]; // Remplacer par le numéro de téléphone réel
 
-const timerGenerator = () => {
-    seconds += 1;
-
-    if(seconds >= 60) {
-        minutes += 1;
-        seconds = 0;
+        // Afficher les options de création de contact
+        navigator.contacts.create(
+            [contact],
+            function (success) {
+                console.log('Contact créé avec succès');
+            },
+            function (error) {
+                console.error('Échec de la création du contact :', error);
+            }
+        );
+    } else {
+        // Gérer le cas où la fonctionnalité n'est pas disponible
+        alert(
+            "Fonctionnalité d'ajout de contact non disponible sur votre appareil."
+        );
     }
+};
 
-    let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
-    let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+(async () => {
+    const params = new URLSearchParams(document.location.search);
+    const userId = params.get('id');
+    const language = params.get('lang');
 
-    timeValue.innerHTML = `<span>Time:</span> ${minutesValue}:${secondsValue}`;
-}
+    const user = await getUserInKaziPro(userId);
 
-const movesCounter = () => {
-    movesCount += 1;
-    moves.innerHTML = `<span>Moves:</span>${movesCount}`;
-}
+    const name = document.getElementById('name');
+    name.textContent = user?.name;
 
-const generateRandom = (size = 4) => {
-    let temporaryArray = [...items];
-    let cardValues = [];
-    // The size should be double (4*4 matrix)/2 sice pairs of objects would exist
-    size = (size * size) / 2;
+    const position = document.getElementById('position');
+    position.textContent = user?.position;
 
-    for (let i = 0; i < size; i++) {
-        const randomIndex = Math.floor(Math.random() * temporaryArray.length);
-        // list of cards
-        cardValues.push(temporaryArray[randomIndex]);
+    const keys = Object.keys(user);
+    console.log(Object.keys(user));
 
-        // Once selected remove the object from temporaryArray
-        temporaryArray.splice(randomIndex, 1);
+    for (key of keys) {
+        console.log(key);
+        try {
+            if (key === 'name') {
+                document.getElementById(
+                    key
+                ).textContent = `${user[key]} ${user?.firstName} ${user?.lastName}`;
+            } else if (key === 'firstName' || key === 'lastName') {
+                continue;
+            } else if (key === 'picture') {
+                document.getElementById(key).setAttribute('src', user[key]);
+            } else if (
+                key === 'instagram' ||
+                key === 'linkedin' ||
+                key === 'facebook'
+            ) {
+                document.getElementById(key).setAttribute('href', user[key]);
+            } else {
+                document.getElementById(key).textContent = user[key];
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
-
-    return cardValues;
-}
-
-const matrixGenerator = (cardValues, size = 4) => {
-    gameContainer.innerHTML = "";
-    cardValues = [...cardValues, ...cardValues];
-
-    shuffle(cardValues);
-
-    for (let i = 0; i < size * size; i++) {
-        gameContainer.innerHTML += `
-            <div class="card-container" data-card-value="${cardValues[i].name}">
-                <div class="card-before">?</div>
-                <div class="card-after">
-                    <img src="${cardValues[i].image}" class="image">
-                </div>
-            </div>
-        `
-    }
-    gameContainer.style.gridTemplateColumns = `repeat(${size}, auto)`;
-
-    cards = document.querySelectorAll(".card-container")
-    cards.forEach((card) => {
-        card.addEventListener("click", () => {
-            if (!card.classList.contains("matched")) {
-                flip(card);
-                
-                if (!firstCard) {
-                    firstCard = card;
-                    firstCardValue = card.getAttribute ("data-card-value");
-                } else {
-                    movesCounter();
-                    secondCard = card;
-                    let secondCardValue = card.getAttribute("data-card-value");
-    
-                   let delay = setTimeout(() => {
-                        if (firstCardValue == secondCardValue) {
-                            firstCard.classList.add("matched");
-                            secondCard.classList.add("matched");
-        
-                            firstCard =  false;
-        
-                            winCount += 1;
-        
-                            if (winCount == Math.floor(cardValues.length / 2)) {
-                                result.innerHTML = `<h2>You won</h2>
-                                <h4>Moves: ${movesCount}</h4>`;
-                                stopGame()
-                            }     
-                        } else {
-                            toOriginalPositionFlip(firstCard);
-                            toOriginalPositionFlip(secondCard);
-                            firstCard = false;
-                            secondCard = false;
-                        }
-                    }, 400)
-                }
-            } 
-        })
-    })
-
-}
-
-startButton.addEventListener("click", () => {
-    movesCount = 0;
-    time = 0;
-    seconds = 0;
-    minutes = 0,
-
-    hide(controls);
-    show(stopButton);
-    hide(startButton);
-
-    interval = setInterval(timerGenerator, 1000);
-    moves.innerHTML = `<span>Moves:</span> ${movesCount}`;
-    initializer();
-})
-
-stopButton.addEventListener(
-    "click",
-    (stopGame = () => {
-        show(controls);
-        hide(stopButton);
-        show(startButton);
-        clearInterval(interval);
-    })
-  );
-
-const initializer = () => {
-    result.innerText = "";
-    winCount = 0;
-    let cardValues = generateRandom();
-    matrixGenerator(cardValues);
-}
+})();

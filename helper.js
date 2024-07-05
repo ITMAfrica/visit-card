@@ -1,0 +1,4 @@
+const dictionary = {
+    en: {},
+    fr: {}
+};
