@@ -1,0 +1,56 @@
+:root{
+    --primary_color: #0777E9 ;
+    --secondary_color: rgb(0, 0, 0, 0.9);
+    --tertiary_color: rgba(0, 0, 0, 0.6);
+  } 
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    color: var(--secondary_color);
+}
+
+body {
+    width: 420px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-weight: 100;
+}
+
+header {
+    border: 1px solid red;
+    background: url("/images/coverPhoto.png");
+    padding: 0 21.73px;
+}
+
+header > img {
+    display: block;
+    margin: 0 auto;
+    height: 118.5px;
+    width: 118.5px;
+    border-radius: 100%;
+}
+
+header h3 {
+    color: var(--tertiary_color);
+}
+
+header a {
+    background-color: var(--primary_color);
+    padding: 10px 12px;
+    border-radius: 29.4px;
+}
+
+header a span {
+    color: white;
+}
+
+.headerButtons {
+    display: flex;
+    justify-content: space-between;
+}
