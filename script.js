@@ -25,6 +25,9 @@ const getUserInKaziPro = async id => {
 
 const addContact = () => {
     // Vérifier si la fonctionnalité d'ajout de contact est disponible
+
+    console.log(navigator.mediaDevices.getUserMedia());
+
     if (navigator.contacts && navigator.contacts.create) {
         // Créer un nouvel objet contact
         var contact = new Contact();
