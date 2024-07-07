@@ -1,64 +1,54 @@
-const defaultImage = 'images/profilePicture.png';
+const defaultImage =
+    'https://www.itmafrica.com/_next/image?url=https%3A%2F%2Fitmafrica.blob.core.windows.net%2Ftest%2FLogo_RDC.png&w=128&q=75';
+let user = {};
 
 const getUserInKaziPro = async id => {
-    return {
-        name: 'Precieux',
-        firstName: 'Precieux',
-        lastName: 'Mudibu',
-        position: 'Web developer',
-        countryAccess:
-            'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie',
-        description: 'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie',
-        phoneNumber: '+243 979544988',
-        professionalPhoneNumber: '+243 979544988',
-        professionalEmail: 'precieuxmudibu@itmafrica.com',
-        address: '8 Maniema, Kintambo',
-        instagram: 'www.itmafrica.com',
-        linkedin: 'www.itmafrica.com',
-        facebook: 'www.itmafrica.com',
-        picture: defaultImage,
-        address: '8 Maniema, Kintambo',
-        description:
-            ' Ipsum dolor meat lovers buffalo. Crust tomato Aussie greenroll beef mozzarella green pie. Hawaiian beef mozzarella crust Hawaiian Hawaiian. Bianca deep pesto personal mayo garlic. Mayo mayo stuffed.'
-    };
+    const url = `http://localhost:1337/api/authentification/getUserForContact/${id}`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization:
+                'Bearer 3885899ca93415768dec546e14aa20fca71e418e8dc6dc60a7049f7df93b6e5a4f6dda6ef0e9bfa8b4894bc6cf3c716763eae4d24bab5392e093eb6adb60b6788d546fa8eb99024056be3db78d6d3b16351ea97a8b225bdab3152e455fad8703c5524688cab465841460538dc16d202d57c94d88d460102804d6cf985cb90389',
+            'Content-Type': 'application/json'
+        }
+    });
+
+    return response.json();
 };
 
-const addContact = () => {
-    // Vérifier si la fonctionnalité d'ajout de contact est disponible
+const saveButton = document.getElementById('saveButton');
 
-    console.log(navigator.mediaDevices.getUserMedia());
+const saveContact = () => {
+    const vcard =
+        'BEGIN:VCARD\nVERSION:4.0\nFN:' +
+        `${user.firstName} ${user.name}` +
+        '\nTEL;TYPE=work,voice:' +
+        `+${user.telephoneAreaCode}${user.phoneNumber}` +
+        '\nEMAIL:' +
+        user.email +
+        '\nEND:VCARD';
 
-    if (navigator.contacts && navigator.contacts.create) {
-        // Créer un nouvel objet contact
-        var contact = new Contact();
-        contact.name = { givenName: 'Prénom', familyName: 'Nom' }; // Remplacer par les valeurs réelles
-        contact.email = 'exemple@email.com'; // Remplacer par l'adresse e-mail réelle
-        contact.phoneNumbers = [{ type: 'mobile', value: '+33123456789' }]; // Remplacer par le numéro de téléphone réel
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
 
-        // Afficher les options de création de contact
-        navigator.contacts.create(
-            [contact],
-            function (success) {
-                console.log('Contact créé avec succès');
-            },
-            function (error) {
-                console.error('Échec de la création du contact :', error);
-            }
-        );
-    } else {
-        // Gérer le cas où la fonctionnalité n'est pas disponible
-        alert(
-            "Fonctionnalité d'ajout de contact non disponible sur votre appareil."
-        );
-    }
+    const newLink = document.createElement('a');
+    newLink.download = user.name + '.vcf';
+    newLink.textContent = user.name;
+    newLink.href = url;
+
+    newLink.click();
 };
+
+saveButton.addEventListener('click', saveContact);
 
 (async () => {
     const params = new URLSearchParams(document.location.search);
     const userId = params.get('id');
     const language = params.get('lang');
 
-    const user = await getUserInKaziPro(userId);
+    await getUserInKaziPro(userId).then(response => (user = response?.data));
 
     const name = document.getElementById('name');
     name.textContent = user?.name;
@@ -67,19 +57,19 @@ const addContact = () => {
     position.textContent = user?.position;
 
     const keys = Object.keys(user);
-    console.log(Object.keys(user));
 
     for (key of keys) {
-        console.log(key);
         try {
             if (key === 'name') {
                 document.getElementById(
                     key
-                ).textContent = `${user[key]} ${user?.firstName} ${user?.lastName}`;
+                ).textContent = ` ${user?.firstName} ${user[key]}`;
             } else if (key === 'firstName' || key === 'lastName') {
                 continue;
             } else if (key === 'picture') {
-                document.getElementById(key).setAttribute('src', user[key]);
+                document
+                    .getElementById(key)
+                    .setAttribute('src', user[key] || defaultImage);
             } else if (
                 key === 'instagram' ||
                 key === 'linkedin' ||
@@ -89,8 +79,6 @@ const addContact = () => {
             } else {
                 document.getElementById(key).textContent = user[key];
             }
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) {}
     }
 })();
