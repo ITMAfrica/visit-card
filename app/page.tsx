@@ -17,13 +17,15 @@ import instagram from '@/public/images/instagram.png';
 import africa from '@/public/images/africa.png';
 import { useEffect, useRef, useState } from 'react';
 import ShareModal from '@/components/shareModal';
+import { useSearchParams } from 'next/navigation';
 
 export default function Home() {
     const [user, setUser]: any = useState({});
     const [url, setUrl]: any = useState({});
     const [modalIsOpen, setModalIsOpen]: any = useState(false);
-    const vcardLinkRef: any = useRef();
-
+    const searchParams = useSearchParams();
+    const lang = searchParams.get('lang');
+    const id: any = searchParams.get('id');
     const documents = [
         {
             label: 'ITM Brochure Holding',
@@ -58,7 +60,7 @@ export default function Home() {
     };
 
     useEffect(() => {
-        getUserInKaziPro(35789)
+        getUserInKaziPro(id)
             .then((response: any) => {
                 setUser(response?.data);
 

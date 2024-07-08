@@ -3,7 +3,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['www.itmafrica.com'],
+        domains: ['www.itmafrica.com', 'itmafrica.blob.core.windows.net'],
         remotePatterns: [
             {
                 protocol: 'http',
