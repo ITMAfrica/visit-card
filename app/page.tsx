@@ -15,10 +15,12 @@ import linkedin from '@/public/images/linkedin.png';
 import facebook from '@/public/images/facebook.png';
 import instagram from '@/public/images/instagram.png';
 import africa from '@/public/images/africa.png';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
     const [user, setUser]: any = useState({});
+    const [url, setUrl]: any = useState({});
+    const vcardLinkRef: any = useRef();
 
     const documents = [
         {
@@ -57,12 +59,24 @@ export default function Home() {
         getUserInKaziPro(35789)
             .then((response: any) => {
                 setUser(response?.data);
+
+                const vcard =
+                    'BEGIN:VCARD\nVERSION:4.0\nFN:' +
+                    `${response?.data.firstName} ${response?.data.name}` +
+                    '\nTEL;TYPE=work,voice:' +
+                    `+${response?.data.telephoneAreaCode}${response?.data.phoneNumber}` +
+                    '\nEMAIL:' +
+                    response?.data.email +
+                    '\nEND:VCARD';
+
+                const blob = new Blob([vcard], { type: 'text/vcard' });
+                const url = URL.createObjectURL(blob);
+                setUrl(url);
             })
             .catch((error: any) => {
                 console.log(error);
             });
     }, []);
-    console.log(user);
     return (
         <>
             <header>
@@ -100,7 +114,11 @@ export default function Home() {
                 </section>
 
                 <section className="headerButtons">
-                    <a id="saveButton">
+                    <a
+                        id="saveButton"
+                        href={url}
+                        download={`${user?.firstName}${user?.name}.vcf`}
+                    >
                         <Image
                             alt="profile"
                             src={contact}
@@ -123,7 +141,6 @@ export default function Home() {
 
                 <Image alt="profile" className="africa" src={africa} />
             </header>
-
             <main>
                 <section>
                     <h2>About</h2>
