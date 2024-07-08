@@ -20,6 +20,24 @@ import { useEffect, useState } from 'react';
 export default function Home() {
     const [user, setUser]: any = useState({});
 
+    const documents = [
+        {
+            label: 'ITM Brochure Holding',
+            link: '',
+            picture: document
+        },
+        {
+            label: 'ITM Brochure Holding',
+            link: '',
+            picture: document
+        },
+        {
+            label: "Profil d'entreprise",
+            link: '',
+            picture: document
+        }
+    ];
+
     const getUserInKaziPro = async (id: number) => {
         const url = `http://localhost:1337/api/authentification/getUserForContact/${id}`;
 
@@ -44,21 +62,21 @@ export default function Home() {
                 console.log(error);
             });
     }, []);
-
+    console.log(user);
     return (
         <>
             <header>
                 <Image
                     alt="profile"
-                    className="coverPhoto"
+                    className="coverPhoto object-cover"
                     src={coverPhoto}
-                    width={113}
-                    height={113}
+                    width={404}
+                    height={102}
                 />
                 <Image
                     alt="profile"
                     id="picture"
-                    className="profilePicture h-[113px] w-[113px]"
+                    className="profilePicture h-[113px] w-[113px] object-contain bg-white"
                     src={
                         user?.picture ||
                         'https://www.itmafrica.com/_next/image?url=https%3A%2F%2Fitmafrica.blob.core.windows.net%2Ftest%2FLogo_RDC.png&w=128&q=75'
@@ -72,11 +90,11 @@ export default function Home() {
                             'Precieux Mudibu'}
                     </h1>
                     <h2 id="position">
-                        {`${user?.firstName} ${user?.name}` ||
+                        {`${user?.contract?.job?.name}` ||
                             'MD RDC Head of Central Division'}
                     </h2>
                     <h3 id="countryAccess">
-                        {`${user?.firstName} ${user?.name}` ||
+                        {`${user?.countryAccesses}` ||
                             'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie'}
                     </h3>
                 </section>
@@ -118,7 +136,8 @@ export default function Home() {
                         <li>
                             <Image alt="profile" src={phone} />
                             <a id="phoneNumber" href="+243979544988">
-                                {user?.phoneNumber || '+243979544988'}
+                                {`+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
+                                    '+243979544988'}
                             </a>
                         </li>
                         <li>
@@ -128,7 +147,8 @@ export default function Home() {
                                 id="professionalPhoneNumber"
                                 href="tel:+243979544988"
                             >
-                                {user?.phoneNumber || '+243979544988'}
+                                {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
+                                    '+243979544988'}
                             </a>
                         </li>
                         <li>
@@ -147,7 +167,11 @@ export default function Home() {
                     </ul>
 
                     <div>
-                        <a target="_blank" id="linkedin" href={user?.linkedin}>
+                        <a
+                            target="_blank"
+                            id="linkedin"
+                            href={`/${user?.linkedin}`}
+                        >
                             <Image
                                 alt="profile"
                                 src={linkedin}
@@ -158,7 +182,7 @@ export default function Home() {
                         <a
                             target="_blank"
                             id="instagram"
-                            href={user?.instagram}
+                            href={`/${user?.instagram}`}
                         >
                             <Image
                                 alt="profile"
@@ -167,7 +191,11 @@ export default function Home() {
                                 height={25}
                             />
                         </a>
-                        <a target="_blank" id="facebook" href={user?.facebook}>
+                        <a
+                            target="_blank"
+                            id="facebook"
+                            href={`/${user?.facebook}`}
+                        >
                             <Image
                                 alt="profile"
                                 src={facebook}
@@ -197,39 +225,24 @@ export default function Home() {
                 <section>
                     <h2>Documentations</h2>
                     <ul>
-                        <li>
-                            <a href="">
-                                <span>Profile ITM SARL</span>
-                                <Image
-                                    width={30}
-                                    height={25}
-                                    alt="profile"
-                                    src={document}
-                                />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span>ITM Brochure Holding</span>
-                                <Image
-                                    width={30}
-                                    height={25}
-                                    alt="profile"
-                                    src={document}
-                                />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span>Profil d'entreprise</span>
-                                <Image
-                                    width={30}
-                                    height={25}
-                                    alt="profile"
-                                    src={document}
-                                />
-                            </a>
-                        </li>
+                        {documents?.map((document: any, index: number) => (
+                            <li key={index} className="w-full text-center">
+                                <a
+                                    href=""
+                                    className="w-full flex flex-col items-center"
+                                >
+                                    <span className="w-full text-center">
+                                        Profile ITM SARL
+                                    </span>
+                                    <Image
+                                        width={30}
+                                        height={25}
+                                        alt="profile"
+                                        src={document?.picture}
+                                    />
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </section>
             </main>
