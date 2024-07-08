@@ -268,10 +268,12 @@ export default function Home() {
                 </section>
             </main>
 
-            <ShareModal
-                isOpen={modalIsOpen}
-                closeModal={() => setModalIsOpen(false)}
-            />
+            <div>
+                <ShareModal
+                    isOpen={modalIsOpen}
+                    closeModal={() => setModalIsOpen(false)}
+                />
+            </div>
         </>
     );
 }
