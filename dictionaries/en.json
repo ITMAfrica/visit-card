@@ -12,5 +12,8 @@
     "documents": "Documents",
     "itmProfileSarl": "ITM Profile SARL",
     "itmBrochureHolding": "ITM Brochure Holding",
-    "companyProfile": "Profil d'entreprise"
+    "companyProfile": "Enterprise profile",
+    "orCopyTheLink": "Or copy the link",
+    "copied": "Copied",
+    "copy": "Copy"
 }

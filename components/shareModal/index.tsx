@@ -7,8 +7,6 @@ import {
     TwitterShareButton,
     LinkedinIcon,
     LinkedinShareButton,
-    TelegramIcon,
-    TelegramShareButton,
     WhatsappIcon,
     WhatsappShareButton
 } from 'next-share';
@@ -16,7 +14,7 @@ import { copyLink } from '../helpers';
 import ModalContainer from '../modal';
 import { useSearchParams } from 'next/navigation';
 
-export default function ShareModal({ isOpen, closeModal }: any) {
+export default function ShareModal({ dictionary, isOpen, closeModal }: any) {
     const [copied, setCopied] = useState(false);
     const searchParams = useSearchParams();
     const lang = searchParams.get('lang');
@@ -41,7 +39,9 @@ export default function ShareModal({ isOpen, closeModal }: any) {
                         e.stopPropagation();
                     }}
                 >
-                    <h1 className="text-lg font-bold">Partager le contact</h1>
+                    <h1 className="text-lg font-bold">
+                        {dictionary?.shareContact}
+                    </h1>
 
                     <div className="mt-4 mb-6 flex items-center justify-between">
                         <FacebookShareButton url={linkToShare}>
@@ -61,7 +61,7 @@ export default function ShareModal({ isOpen, closeModal }: any) {
                     </div>
 
                     <p className="text-sm font-medium mb-2">
-                        Ou copier le lien
+                        {dictionary?.orCopyTheLink}
                     </p>
                     <div className="border rounded py-2 px-4 w-full flex text-sm">
                         <p className="w-full overflow-y-hidden mr-2">
@@ -69,7 +69,7 @@ export default function ShareModal({ isOpen, closeModal }: any) {
                         </p>
                         {copied ? (
                             <p className="text-green-500 font-medium w-12">
-                                Copié
+                                {dictionary?.copied}
                             </p>
                         ) : (
                             <button
@@ -77,7 +77,7 @@ export default function ShareModal({ isOpen, closeModal }: any) {
                                 type="button"
                                 className="text-primary font-medium w-12"
                             >
-                                Copier
+                                {dictionary?.copy}
                             </button>
                         )}
                     </div>

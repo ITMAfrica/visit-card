@@ -53,7 +53,7 @@ export default function HomePage({ dictionary }: any) {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization:
-                    'Bearer ee70c4813dfc05395f129e3ca7adb3959b4280b44f42befd44cd5c5777bb1b063a454cb241816e9a06c30a49caf5cf730522a8cb950588ced9f609635fa4d5674cfc230756b6e88f214b8c5d18f19cdf12f3ed79fe9dc31a389ebcc9e14437f017dd4002bb9928c038b97f5bfccbd2bc234d1b55a136642efc30090e84b5384b'
+                    'Bearer 3885899ca93415768dec546e14aa20fca71e418e8dc6dc60a7049f7df93b6e5a4f6dda6ef0e9bfa8b4894bc6cf3c716763eae4d24bab5392e093eb6adb60b6788d546fa8eb99024056be3db78d6d3b16351ea97a8b225bdab3152e455fad8703c5524688cab465841460538dc16d202d57c94d88d460102804d6cf985cb90389'
             }
         });
 
@@ -63,6 +63,8 @@ export default function HomePage({ dictionary }: any) {
     useEffect(() => {
         getUserInKaziPro(id)
             .then((response: any) => {
+                console.log(response);
+
                 setUser(response?.data);
 
                 const vcard =
@@ -82,8 +84,6 @@ export default function HomePage({ dictionary }: any) {
                 console.log(error);
             });
     }, []);
-
-    console.log(dictionary);
 
     return (
         <>
@@ -112,11 +112,12 @@ export default function HomePage({ dictionary }: any) {
                             'Precieux Mudibu'}
                     </h1>
                     <h2 id="position">
-                        {`${user?.contract?.job?.name}` || 'ITM'}
+                        {user?.contract?.job?.name
+                            ? user?.contract?.job?.name
+                            : 'ITM'}
                     </h2>
                     <h3 id="countryAccess">
-                        {`${user?.countryAccesses}` ||
-                            'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie'}
+                        {user?.countryAccesses ? user?.countryAccesses : 'ITM'}
                     </h3>
                 </section>
 
@@ -159,7 +160,7 @@ export default function HomePage({ dictionary }: any) {
                             <Image alt="profile" src={globIcon} />
                             <a href="itmafrica.com">www.itmafrica.com</a>
                         </li>
-                        {user?.telephoneAreaCode && user.phoneNumber && (
+                        {user?.telephoneAreaCode && user?.phoneNumber && (
                             <li>
                                 <Image alt="profile" src={phone} />
                                 <a id="phoneNumber" href="+243979544988">
@@ -168,7 +169,7 @@ export default function HomePage({ dictionary }: any) {
                                 </a>
                             </li>
                         )}
-                        {user.contract && (
+                        {user?.contract && (
                             <li>
                                 <Image alt="profile" src={building} />
 
@@ -181,7 +182,7 @@ export default function HomePage({ dictionary }: any) {
                                 </a>
                             </li>
                         )}
-                        {user.email && (
+                        {user?.email && (
                             <li>
                                 <Image alt="profile" src={email} />
                                 <a
@@ -281,6 +282,7 @@ export default function HomePage({ dictionary }: any) {
 
             <div>
                 <ShareModal
+                    dictionary={dictionary}
                     isOpen={modalIsOpen}
                     closeModal={() => setModalIsOpen(false)}
                 />
