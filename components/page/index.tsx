@@ -29,17 +29,17 @@ export default function HomePage({ dictionary }: any) {
 
     const documents = [
         {
-            label: 'ITM Brochure Holding',
+            label: dictionary.itmProfileSarl,
             link: '',
             picture: document
         },
         {
-            label: 'ITM Brochure Holding',
+            label: dictionary.itmBrochureHolding,
             link: '',
             picture: document
         },
         {
-            label: "Profil d'entreprise",
+            label: dictionary.companyProfile,
             link: '',
             picture: document
         }
@@ -82,6 +82,9 @@ export default function HomePage({ dictionary }: any) {
                 console.log(error);
             });
     }, []);
+
+    console.log(dictionary);
+
     return (
         <>
             <header>
@@ -109,8 +112,7 @@ export default function HomePage({ dictionary }: any) {
                             'Precieux Mudibu'}
                     </h1>
                     <h2 id="position">
-                        {`${user?.contract?.job?.name}` ||
-                            'MD RDC Head of Central Division'}
+                        {`${user?.contract?.job?.name}` || 'ITM'}
                     </h2>
                     <h3 id="countryAccess">
                         {`${user?.countryAccesses}` ||
@@ -130,7 +132,7 @@ export default function HomePage({ dictionary }: any) {
                             width={15}
                             height={15}
                         />
-                        <span>Ajouter aux contacts</span>
+                        <span>{dictionary.addToContact}</span>
                     </a>
 
                     <a>
@@ -141,7 +143,7 @@ export default function HomePage({ dictionary }: any) {
                             height={15}
                         />
                         <span onClick={() => setModalIsOpen(true)}>
-                            Partager le contact
+                            {dictionary.shareContact}
                         </span>
                     </a>
                 </section>
@@ -150,44 +152,55 @@ export default function HomePage({ dictionary }: any) {
             </header>
             <main>
                 <section>
-                    <h2>About</h2>
+                    <h2>{dictionary.about}</h2>
                     <p id="description"></p>
                     <ul>
                         <li>
                             <Image alt="profile" src={globIcon} />
                             <a href="itmafrica.com">www.itmafrica.com</a>
                         </li>
-                        <li>
-                            <Image alt="profile" src={phone} />
-                            <a id="phoneNumber" href="+243979544988">
-                                {`+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
-                                    '+243979544988'}
-                            </a>
-                        </li>
-                        <li>
-                            <Image alt="profile" src={building} />
+                        {user?.telephoneAreaCode && user.phoneNumber && (
+                            <li>
+                                <Image alt="profile" src={phone} />
+                                <a id="phoneNumber" href="+243979544988">
+                                    {`+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
+                                        '+243979544988'}
+                                </a>
+                            </li>
+                        )}
+                        {user.contract && (
+                            <li>
+                                <Image alt="profile" src={building} />
 
-                            <a
-                                id="professionalPhoneNumber"
-                                href="tel:+243979544988"
-                            >
-                                {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
-                                    '+243979544988'}
-                            </a>
-                        </li>
-                        <li>
-                            <Image alt="profile" src={email} />
-                            <a id="email" href="mailto:votreadresse@mail.fr">
-                                {user?.email || 'precieux@gmail.com'}
-                            </a>
-                        </li>
-                        <li>
-                            <Image alt="profile" src={localisation} />
-                            <a id="address">
-                                {' '}
-                                {user?.address || 'precieux@gmail.com'}
-                            </a>
-                        </li>
+                                <a
+                                    id="professionalPhoneNumber"
+                                    href="tel:+243979544988"
+                                >
+                                    {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
+                                        '+243979544988'}
+                                </a>
+                            </li>
+                        )}
+                        {user.email && (
+                            <li>
+                                <Image alt="profile" src={email} />
+                                <a
+                                    id="email"
+                                    href="mailto:votreadresse@mail.fr"
+                                >
+                                    {user?.email || 'precieux@gmail.com'}
+                                </a>
+                            </li>
+                        )}
+                        {user?.address && (
+                            <li>
+                                <Image alt="profile" src={localisation} />
+                                <a id="address">
+                                    {' '}
+                                    {user?.address || 'precieux@gmail.com'}
+                                </a>
+                            </li>
+                        )}
                     </ul>
 
                     <div>
@@ -231,33 +244,28 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2>Services</h2>
+                    <h2>{dictionary.services}</h2>
+                    <p>{dictionary.servicesDetailsParagraph1}</p>
                     <p>
-                        En tant que leader dans le domaine de la gestion du
-                        personnel, nous nous distinguons par notre expertise et
-                        notre engagement envers l'excellence.
-                    </p>
-                    <p>
-                        Nous offrons des solutions innovantes en :<br />
-                        🔹 Recrutement <br />
-                        🔹 Formation <br />
-                        🔹 Placement <br />
-                        🔹 Gestion des talents et des compétences
+                        {dictionary.servicesDetailsParagraph2}
+                        <br />
+                        🔹 {dictionary.recruitment} <br />
+                        🔹 {dictionary.training} <br />
+                        🔹 {dictionary.placement} <br />
+                        🔹 {dictionary.talentAndSkillsManagement}
                     </p>
                 </section>
 
                 <section>
-                    <h2>Documentations</h2>
+                    <h2>{dictionary.documents}</h2>
                     <ul>
                         {documents?.map((document: any, index: number) => (
-                            <li key={index} className="w-full text-center">
+                            <li key={index} className="w-full">
                                 <a
                                     href=""
                                     className="w-full flex flex-col items-center"
                                 >
-                                    <span className="w-full text-center">
-                                        Profile ITM SARL
-                                    </span>
+                                    <span className="">{document.label}</span>
                                     <Image
                                         width={30}
                                         height={25}
