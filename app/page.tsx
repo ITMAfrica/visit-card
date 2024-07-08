@@ -16,10 +16,12 @@ import facebook from '@/public/images/facebook.png';
 import instagram from '@/public/images/instagram.png';
 import africa from '@/public/images/africa.png';
 import { useEffect, useRef, useState } from 'react';
+import ShareModal from '@/components/shareModal';
 
 export default function Home() {
     const [user, setUser]: any = useState({});
     const [url, setUrl]: any = useState({});
+    const [modalIsOpen, setModalIsOpen]: any = useState(false);
     const vcardLinkRef: any = useRef();
 
     const documents = [
@@ -135,7 +137,9 @@ export default function Home() {
                             width={15}
                             height={15}
                         />
-                        <span>Partager le contact</span>
+                        <span onClick={() => setModalIsOpen(true)}>
+                            Partager le contact
+                        </span>
                     </a>
                 </section>
 
@@ -263,6 +267,11 @@ export default function Home() {
                     </ul>
                 </section>
             </main>
+
+            <ShareModal
+                isOpen={modalIsOpen}
+                closeModal={() => setModalIsOpen(false)}
+            />
         </>
     );
 }
