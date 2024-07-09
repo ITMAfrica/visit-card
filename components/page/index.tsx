@@ -170,7 +170,11 @@ export default function HomePage({ dictionary }: any) {
                     <ul>
                         <li>
                             <Image alt="profile" src={globIcon} />
-                            <a href="https://www.itmafrica.com/">
+
+                            <a
+                                href="https://www.itmafrica.com/"
+                                target="_blank"
+                            >
                                 www.itmafrica.com
                             </a>
                         </li>
