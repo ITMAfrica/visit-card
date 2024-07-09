@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --primaryColor: #0777E9 ;
+    --secondaryColor: rgb(0, 0, 0, 0.9);
+    --tertiaryColor: rgba(0, 0, 0, 0.6);
+    --normalSize: 14px;
+    --mediumSize: 14px;
+    --bigSize: 14px;
+  } 
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    color: var(--secondaryColor);
+}
+
+body {
+    width: 420px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #e5e5e5;
+}
+
+h1, h2, h3 {
+    font-weight: 100;
+}
+
+h1 {
+    font-size: 22px;
+    margin: 2px 0;
+}
+
+h2 {
+    font-size: 18.11px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-size: 15px;
+}
+
+p, a {
+    font-size: var(--normalSize);
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+section {
+    padding: 0 21.73px;
+    background-color:#FFFFFF;
+}
+
+header {
+    border: 1px solid rgba(255, 0, 0, 0);
+    background-color:#FFFFFF;
+    position: relative;
+    z-index: 1;
+}
+
+.profilePicture {
+    display: block;
+    margin: 40px auto 0 auto;
+    height: 118.5px;
+    width: 118.5px;
+    border-radius: 100%;
+    border: 3px solid #FFFFFF;
+}
+
+.coverPhoto {
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    /* top: 10px; */
+    z-index: -1;
+
+}
+
+.africa {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    top: 110px;
+}
+
+header section h1, header section h2, header section h3 {
+    width: 75%;
+
+}
+
+header h3 {
+    color: var(--tertiaryColor);
+    margin-top: 10px;
+}
+
+header a {
+    background-color: var(--primaryColor);
+    padding: 10px 12px;
+    border-radius: 29.4px;
+    display: flex;
+    align-items: center;
+}
+
+header a img {
+    margin-right: 5px;
+}
+
+header a span {
+    color: #FFFFFF;
+}
+
+.headerButtons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+main section {
+    margin: 7px 0;
+    padding: 17.3px 21.73px;;
+    background-color:#FFFFFF;
+}
+
+main section p {
+    margin: 15px 0;
+}
+
+main section li {
+    margin: 27px 0;
+}
+
+main section li img {
+    margin-right: 5px;
+}
+
+main section div {
+    border: 2px solid var(--primaryColor);
+    display: flex;
+    justify-content: space-between;
+    padding: 11.29px 117px;
+    border-radius: 7.88px;
+}
+
+main section:last-child ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+main section:last-child ul li {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+main section:last-child ul li a span {
+    display: block;
+    margin-bottom: 24px;
+}
