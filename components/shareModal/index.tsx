@@ -10,7 +10,7 @@ import {
     WhatsappIcon,
     WhatsappShareButton
 } from 'next-share';
-import { copyLink } from '../helpers';
+import { copyLink } from '@/helpers';
 import ModalContainer from '../modal';
 import { useSearchParams } from 'next/navigation';
 

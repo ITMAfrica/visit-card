@@ -19,6 +19,7 @@ import { useEffect, useRef, useState } from 'react';
 import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
 import { getDictionary } from '@/get-dictionary';
+import { fetchConfig } from '@/helpers';
 
 export default function HomePage({ dictionary }: any) {
     const [user, setUser]: any = useState({});
@@ -46,15 +47,11 @@ export default function HomePage({ dictionary }: any) {
     ];
 
     const getUserInKaziPro = async (id: number) => {
-        const url = `http://localhost:1337/api/authentification/getUserForContact/${id}`;
+        const url = `${process.env.NEXT_PUBLIC_API}/authentification/getUserForContact/${id}`;
 
         const response = await fetch(url, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization:
-                    'Bearer 3885899ca93415768dec546e14aa20fca71e418e8dc6dc60a7049f7df93b6e5a4f6dda6ef0e9bfa8b4894bc6cf3c716763eae4d24bab5392e093eb6adb60b6788d546fa8eb99024056be3db78d6d3b16351ea97a8b225bdab3152e455fad8703c5524688cab465841460538dc16d202d57c94d88d460102804d6cf985cb90389'
-            }
+            headers: fetchConfig.headers
         });
 
         return response.json();
@@ -63,7 +60,7 @@ export default function HomePage({ dictionary }: any) {
     useEffect(() => {
         getUserInKaziPro(id)
             .then((response: any) => {
-                console.log(response);
+                console.log('response', response);
 
                 setUser(response?.data);
 
@@ -84,6 +81,8 @@ export default function HomePage({ dictionary }: any) {
                 console.log(error);
             });
     }, []);
+
+    console.log(dictionary);
 
     return (
         <>
@@ -112,12 +111,11 @@ export default function HomePage({ dictionary }: any) {
                             'Precieux Mudibu'}
                     </h1>
                     <h2 id="position">
-                        {user?.contract?.job?.name
-                            ? user?.contract?.job?.name
-                            : 'ITM'}
+                        {`${user?.contract?.job?.name}` || 'ITM'}
                     </h2>
                     <h3 id="countryAccess">
-                        {user?.countryAccesses ? user?.countryAccesses : 'ITM'}
+                        {`${user?.countryAccesses}` ||
+                            'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie'}
                     </h3>
                 </section>
 
@@ -160,7 +158,7 @@ export default function HomePage({ dictionary }: any) {
                             <Image alt="profile" src={globIcon} />
                             <a href="itmafrica.com">www.itmafrica.com</a>
                         </li>
-                        {user?.telephoneAreaCode && user?.phoneNumber && (
+                        {user?.telephoneAreaCode && user.phoneNumber && (
                             <li>
                                 <Image alt="profile" src={phone} />
                                 <a id="phoneNumber" href="+243979544988">
@@ -282,7 +280,6 @@ export default function HomePage({ dictionary }: any) {
 
             <div>
                 <ShareModal
-                    dictionary={dictionary}
                     isOpen={modalIsOpen}
                     closeModal={() => setModalIsOpen(false)}
                 />
