@@ -71,8 +71,6 @@ export default function HomePage({ dictionary }: any) {
     useEffect(() => {
         getUserInKaziPro(id)
             .then(async (response: any) => {
-                console.log('response', response);
-
                 await generateMetadata(response.data);
 
                 setUser(response?.data);
@@ -166,7 +164,7 @@ export default function HomePage({ dictionary }: any) {
             <main>
                 <section>
                     <h2>{dictionary.about}</h2>
-                    <p id="description"></p>
+                    <p id="description">{user?.description}</p>
                     <ul>
                         <li>
                             <Image alt="profile" src={globIcon} />
