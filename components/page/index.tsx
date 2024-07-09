@@ -280,6 +280,7 @@ export default function HomePage({ dictionary }: any) {
 
             <div>
                 <ShareModal
+                    dictionary={dictionary}
                     isOpen={modalIsOpen}
                     closeModal={() => setModalIsOpen(false)}
                 />
