@@ -21,6 +21,30 @@ import { useSearchParams } from 'next/navigation';
 import { getDictionary } from '@/get-dictionary';
 import { fetchConfig } from '@/helpers';
 import LoaderLayout from '../loaderLayout';
+import { Metadata, ResolvingMetadata } from 'next';
+
+const getUserInKaziPro = async (id: number) => {
+    const url = `${process.env.NEXT_PUBLIC_API}/authentification/getUserForContact/${id}`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: fetchConfig.headers
+    });
+
+    return response.json();
+};
+
+type Props = {
+    user: any;
+};
+
+export async function generateMetadata({ user }: Props): Promise<Metadata> {
+    console.log('USER--/', user);
+
+    return {
+        title: user?.firstName
+    };
+}
 
 export default function HomePage({ dictionary }: any) {
     const [user, setUser]: any = useState({});
@@ -34,36 +58,22 @@ export default function HomePage({ dictionary }: any) {
     const documents = [
         {
             label: dictionary.itmProfileSarl,
-            link: '',
+            link: 'https://itmafrica.blob.core.windows.net/test/Profil_Sarl_2023.pdf',
             picture: document
         },
         {
             label: dictionary.itmBrochureHolding,
-            link: '',
-            picture: document
-        },
-        {
-            label: dictionary.companyProfile,
-            link: '',
+            link: 'https://itmafrica.blob.core.windows.net/test/Profil_holding_2023.pdf',
             picture: document
         }
     ];
 
-    const getUserInKaziPro = async (id: number) => {
-        const url = `${process.env.NEXT_PUBLIC_API}/authentification/getUserForContact/${id}`;
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: fetchConfig.headers
-        });
-
-        return response.json();
-    };
-
     useEffect(() => {
         getUserInKaziPro(id)
-            .then((response: any) => {
+            .then(async (response: any) => {
                 console.log('response', response);
+
+                await generateMetadata(response.data);
 
                 setUser(response?.data);
 
@@ -114,11 +124,12 @@ export default function HomePage({ dictionary }: any) {
                             'Precieux Mudibu'}
                     </h1>
                     <h2 id="position">
-                        {`${user?.contract?.job?.name}` || 'ITM'}
+                        {user?.contract?.job?.name
+                            ? user?.contract?.job?.name
+                            : 'ITM'}
                     </h2>
                     <h3 id="countryAccess">
-                        {`${user?.countryAccesses}` ||
-                            'France, Congo Brazza, Gabon, Cameroun, Angola et Zambie'}
+                        {user?.countryAccesses ? user?.countryAccesses : 'ITM'}
                     </h3>
                 </section>
 
@@ -264,7 +275,7 @@ export default function HomePage({ dictionary }: any) {
                         {documents?.map((document: any, index: number) => (
                             <li key={index} className="w-full">
                                 <a
-                                    href=""
+                                    href={document?.link}
                                     className="w-full flex flex-col items-center"
                                 >
                                     <span className="">{document.label}</span>
