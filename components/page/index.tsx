@@ -20,11 +20,14 @@ import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
 import { getDictionary } from '@/get-dictionary';
 import { fetchConfig } from '@/helpers';
+import LoaderLayout from '../loaderLayout';
 
 export default function HomePage({ dictionary }: any) {
     const [user, setUser]: any = useState({});
     const [url, setUrl]: any = useState({});
     const [modalIsOpen, setModalIsOpen]: any = useState(false);
+    const [loaderStatusVisibility, setLoaderStatusVisibility]: any =
+        useState(true);
     const searchParams = useSearchParams();
     const id: any = searchParams.get('id');
 
@@ -76,16 +79,16 @@ export default function HomePage({ dictionary }: any) {
                 const blob = new Blob([vcard], { type: 'text/vcard' });
                 const url = URL.createObjectURL(blob);
                 setUrl(url);
+                setLoaderStatusVisibility(false);
             })
             .catch((error: any) => {
                 console.log(error);
+                setLoaderStatusVisibility(false);
             });
     }, []);
 
-    console.log(dictionary);
-
     return (
-        <>
+        <LoaderLayout loaderStatusVisibility={loaderStatusVisibility}>
             <header>
                 <Image
                     alt="profile"
@@ -285,6 +288,6 @@ export default function HomePage({ dictionary }: any) {
                     closeModal={() => setModalIsOpen(false)}
                 />
             </div>
-        </>
+        </LoaderLayout>
     );
 }
