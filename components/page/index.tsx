@@ -19,32 +19,9 @@ import { useEffect, useRef, useState } from 'react';
 import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
 import { getDictionary } from '@/get-dictionary';
-import { fetchConfig } from '@/helpers';
+import { fetchConfig, getUserInKaziPro } from '@/helpers';
 import LoaderLayout from '../loaderLayout';
 import { Metadata, ResolvingMetadata } from 'next';
-
-const getUserInKaziPro = async (id: number) => {
-    const url = `${process.env.NEXT_PUBLIC_API}/authentification/getUserForContact/${id}`;
-
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: fetchConfig.headers
-    });
-
-    return response.json();
-};
-
-type Props = {
-    user: any;
-};
-
-export async function generateMetadata({ user }: Props): Promise<Metadata> {
-    console.log('USER--/', user);
-
-    return {
-        title: user?.firstName
-    };
-}
 
 export default function HomePage({ dictionary }: any) {
     const [user, setUser]: any = useState({});
@@ -71,10 +48,6 @@ export default function HomePage({ dictionary }: any) {
     useEffect(() => {
         getUserInKaziPro(id)
             .then(async (response: any) => {
-                console.log('response', response);
-
-                await generateMetadata(response.data);
-
                 setUser(response?.data);
 
                 const vcard =
@@ -166,11 +139,17 @@ export default function HomePage({ dictionary }: any) {
             <main>
                 <section>
                     <h2>{dictionary.about}</h2>
-                    <p id="description"></p>
+                    <p id="description">{user?.description}</p>
                     <ul>
                         <li>
                             <Image alt="profile" src={globIcon} />
-                            <a href="itmafrica.com">www.itmafrica.com</a>
+
+                            <a
+                                href="https://www.itmafrica.com/"
+                                target="_blank"
+                            >
+                                www.itmafrica.com
+                            </a>
                         </li>
                         {user?.telephoneAreaCode && user.phoneNumber && (
                             <li>

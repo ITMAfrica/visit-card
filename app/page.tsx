@@ -1,14 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
-import HomePage from '@/components/page';
-import { getDictionary } from '@/get-dictionary';
-import { Suspense } from 'react';
+'use client';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default async function Home() {
-    const dictionary = await getDictionary('fr');
-
-    return (
-        <Suspense>
-            <HomePage dictionary={dictionary} />;
-        </Suspense>
-    );
+export default function PageHome() {
+    const { push } = useRouter();
+    useEffect(() => {
+        push('/fr');
+    }, []);
+    return <></>;
 }

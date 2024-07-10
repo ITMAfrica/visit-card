@@ -12,3 +12,14 @@ export const fetchConfig = {
         'content-type': 'application/json'
     }
 };
+
+export const getUserInKaziPro = async (id: number) => {
+    const url = `${process.env.NEXT_PUBLIC_API}/authentification/getUserForContact/${id}`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: fetchConfig.headers
+    });
+
+    return response.json();
+};
