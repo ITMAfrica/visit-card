@@ -199,7 +199,9 @@ export default function HomePage({ dictionary }: any) {
                         <a
                             target="_blank"
                             id="linkedin"
-                            href={`/${user?.linkedin}`}
+                            href={
+                                'https://www.linkedin.com/in/itm-africa-7526a6162/'
+                            }
                         >
                             <Image
                                 alt="profile"
@@ -211,7 +213,7 @@ export default function HomePage({ dictionary }: any) {
                         <a
                             target="_blank"
                             id="instagram"
-                            href={`/${user?.instagram}`}
+                            href={`https://www.instagram.com/itm_africa/?hl=fr`}
                         >
                             <Image
                                 alt="profile"
@@ -223,7 +225,7 @@ export default function HomePage({ dictionary }: any) {
                         <a
                             target="_blank"
                             id="facebook"
-                            href={`/${user?.facebook}`}
+                            href={`https://www.facebook.com/itmafrica`}
                         >
                             <Image
                                 alt="profile"

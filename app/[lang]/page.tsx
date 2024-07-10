@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import HomePage from '@/components/page';
 import { getDictionary } from '@/get-dictionary';
 import { Suspense } from 'react';
