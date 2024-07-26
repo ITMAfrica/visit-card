@@ -108,9 +108,11 @@ header h3 {
 
 header a {
     background-color: var(--primaryColor);
+    width: 180px;
     padding: 10px 12px;
     border-radius: 29.4px;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -125,6 +127,7 @@ header a span {
 .headerButtons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 20px 0;
 }
 
