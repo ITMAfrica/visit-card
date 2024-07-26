@@ -18,10 +18,8 @@ import africa from '@/public/images/africa.png';
 import { useEffect, useRef, useState } from 'react';
 import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
-import { getDictionary } from '@/get-dictionary';
-import { fetchConfig, getUserInKaziPro } from '@/helpers';
+import { getUserInKaziPro } from '@/helpers';
 import LoaderLayout from '../loaderLayout';
-import { Metadata, ResolvingMetadata } from 'next';
 
 export default function HomePage({ dictionary }: any) {
     const [user, setUser]: any = useState({});
@@ -45,6 +43,7 @@ export default function HomePage({ dictionary }: any) {
         }
     ];
 
+    console.log('USER', user);
     useEffect(() => {
         getUserInKaziPro(id)
             .then(async (response: any) => {
@@ -154,7 +153,13 @@ export default function HomePage({ dictionary }: any) {
                         {user?.telephoneAreaCode && user.phoneNumber && (
                             <li>
                                 <Image alt="profile" src={phone} />
-                                <a id="phoneNumber" href="+243979544988">
+                                <a
+                                    id="phoneNumber"
+                                    href={
+                                        `+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
+                                        '+243979544988'
+                                    }
+                                >
                                     {`+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
                                         '+243979544988'}
                                 </a>
@@ -166,7 +171,7 @@ export default function HomePage({ dictionary }: any) {
 
                                 <a
                                     id="professionalPhoneNumber"
-                                    href="tel:+243979544988"
+                                    href={`${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}`}
                                 >
                                     {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
                                         '+243979544988'}
@@ -176,10 +181,7 @@ export default function HomePage({ dictionary }: any) {
                         {user?.email && (
                             <li>
                                 <Image alt="profile" src={email} />
-                                <a
-                                    id="email"
-                                    href="mailto:votreadresse@mail.fr"
-                                >
+                                <a id="email" href={user?.email}>
                                     {user?.email || 'precieux@gmail.com'}
                                 </a>
                             </li>
@@ -199,9 +201,7 @@ export default function HomePage({ dictionary }: any) {
                         <a
                             target="_blank"
                             id="linkedin"
-                            href={
-                                'https://www.linkedin.com/in/itm-africa-7526a6162/'
-                            }
+                            href={`${user?.organisationCity?.organisation?.linkedinLink}`}
                         >
                             <Image
                                 alt="profile"
@@ -213,7 +213,7 @@ export default function HomePage({ dictionary }: any) {
                         <a
                             target="_blank"
                             id="instagram"
-                            href={`https://www.instagram.com/itm_africa/?hl=fr`}
+                            href={`${user?.organisationCity?.organisation?.instagramLink}`}
                         >
                             <Image
                                 alt="profile"
@@ -225,7 +225,7 @@ export default function HomePage({ dictionary }: any) {
                         <a
                             target="_blank"
                             id="facebook"
-                            href={`https://www.facebook.com/itmafrica`}
+                            href={`${user?.organisationCity?.organisation?.facebookLink}`}
                         >
                             <Image
                                 alt="profile"
