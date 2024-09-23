@@ -20,6 +20,9 @@ import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
 import { getUserInKaziPro } from '@/helpers';
 import LoaderLayout from '../loaderLayout';
+import { IoLogoLinkedin } from 'react-icons/io5';
+import { FaInstagram } from 'react-icons/fa6';
+import { FaFacebookSquare } from 'react-icons/fa';
 
 export default function HomePage({ dictionary }: any) {
     const [user, setUser]: any = useState({});
@@ -200,39 +203,21 @@ export default function HomePage({ dictionary }: any) {
                     <div>
                         <a
                             target="_blank"
-                            id="linkedin"
                             href={`${user?.organisationCity?.organisation?.linkedinLink}`}
                         >
-                            <Image
-                                alt="profile"
-                                src={linkedin}
-                                width={30}
-                                height={25}
-                            />
+                            <IoLogoLinkedin className="h-[25px] w-[30px] text-blue-700" />
                         </a>
                         <a
                             target="_blank"
-                            id="instagram"
                             href={`${user?.organisationCity?.organisation?.instagramLink}`}
                         >
-                            <Image
-                                alt="profile"
-                                src={instagram}
-                                width={30}
-                                height={25}
-                            />
+                            <FaInstagram className="h-[25px] w-[30px] text-pink-600" />
                         </a>
                         <a
                             target="_blank"
-                            id="facebook"
                             href={`${user?.organisationCity?.organisation?.facebookLink}`}
                         >
-                            <Image
-                                alt="profile"
-                                src={facebook}
-                                width={30}
-                                height={25}
-                            />
+                            <FaFacebookSquare className="h-[25px] w-[30px] text-blue-700" />
                         </a>
                     </div>
                 </section>
