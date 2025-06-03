@@ -14,6 +14,8 @@ import linkedin from '@/public/images/linkedin.png';
 import facebook from '@/public/images/facebook.png';
 import instagram from '@/public/images/instagram.png';
 import africa from '@/public/images/africa.png';
+import banner from "@/public/images/banner.jpg";
+import carte from "@/public/images/carteITm.jpg";
 import { useEffect, useState } from 'react';
 import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
@@ -65,45 +67,45 @@ export default function HomePage({ dictionary }: any) {
                 setLoaderStatusVisibility(false);
             });
     }, []);
-    console.log(coverPhoto.height, coverPhoto.width);
 
     if (!user) return <div className="w-full"></div>
     return (
         <LoaderLayout loaderStatusVisibility={loaderStatusVisibility}>
-            <header>
+            <header className='border w-full overflow-hidden relative'>
                 <Image
                     alt="profile"
                     className="coverPhoto object-cover"
-                    src={coverPhoto}
+                    src={banner}
                     width={404}
-                    height={102}
+                    height={100}
                 />
-                {<Image
+                <Image alt="profile" className=" absolute top-[105px] -right-3" src={carte} height={140} width={140} />
+                <Image
                     alt="profile"
                     id="picture"
-                    className="profilePicture h-[113px] w-[113px] object-contain bg-white"
+                    className="profilePicture h-[100px] w-[100px] object-contain bg-white"
                     src={
                         user?.picture ||
                         'https://www.itmafrica.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcd.38a5bff4.png&w=256&q=75'
                     }
-                    width={148}
-                    height={156}
-                />}
+                    width={100}
+                    height={100}
+                />
                 <section>
                     <h1 id="name" className='font-bold'>
                         {`${user?.firstName} ${user?.name}` ||
-                            'Precieux Mudibu'}
+                            ''}
                     </h1>
-                    <h2 id="position">
+                    <h2 id="position" className='font-medium'>
                         {user?.contract?.job?.name
                             ? user?.contract?.job?.name
-                            : 'ITM'}
+                            : user.id == 8778 ? 'Chairman' : ""}
                     </h2>
                     <h3 id="countryAccess">
-                        {user?.countryAccesses ? user?.countryAccesses : 'ITM'}
+                        {user?.countryAccesses ? user?.countryAccesses : ''}
                     </h3>
                 </section>
-                <section className="headerButtons">
+                <section className="headerButtons relative mt-3">
                     <a
                         id="saveButton"
                         href={url}
@@ -130,7 +132,6 @@ export default function HomePage({ dictionary }: any) {
                         </span>
                     </a>
                 </section>
-                <Image alt="profile" className="africa" src={africa} />
             </header>
             <main>
                 <section>
