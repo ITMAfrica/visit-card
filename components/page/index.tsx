@@ -117,7 +117,7 @@ export default function HomePage({ dictionary }: any) {
                             width={15}
                             height={15}
                         />
-                        <span>{dictionary.addToContact}</span>
+                        <span className='lg:text-sm text-xs'>{dictionary.addToContact}</span>
                     </a>
 
                     <a>
@@ -127,7 +127,9 @@ export default function HomePage({ dictionary }: any) {
                             width={15}
                             height={15}
                         />
-                        <span onClick={() => setModalIsOpen(true)}>
+                        <span onClick={() => setModalIsOpen(true)}
+                            className='lg:text-sm text-xs'
+                        >
                             {dictionary.shareContact}
                         </span>
                     </a>
