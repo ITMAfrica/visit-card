@@ -135,11 +135,12 @@ export default function HomePage({ dictionary }: any) {
                 <section>
                     <h2 className='font-bold'>{dictionary.about}</h2>
                     <p id="description">{user?.description}</p>
-                    <ul>
+                    <ul >
                         <li>
                             <Image alt="profile" src={globIcon} />
                             <a
                                 href="https://www.itmafrica.com/"
+                                className='hover:font-bold'
                                 target="_blank"
                             >
                                 www.itmafrica.com
@@ -151,6 +152,7 @@ export default function HomePage({ dictionary }: any) {
                                 <a
                                     id="phoneNumber"
                                     target='_blank'
+                                    className='hover:font-bold'
                                     href={
                                         `tel:+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
                                         '+243979544988'
@@ -167,6 +169,7 @@ export default function HomePage({ dictionary }: any) {
                                 <a
                                     id="professionalPhoneNumber"
                                     target='_blank'
+                                    className='hover:font-bold'
                                     href={`tel:${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}`}
                                 >
                                     {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
@@ -178,6 +181,7 @@ export default function HomePage({ dictionary }: any) {
                             <li>
                                 <Image alt="profile" src={email} />
                                 <a id="email"
+                                    className='hover:font-bold'
                                     target='_blank'
                                     href={`mailto:${user?.email}`}>
                                     {user?.email || 'precieux@gmail.com'}
