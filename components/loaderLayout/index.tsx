@@ -5,7 +5,7 @@ export default function LoaderLayout({
     loaderStatusVisibility
 }: any) {
     return loaderStatusVisibility ? (
-        <div className="h-screen w-full flex items-center justify-center">
+        <div className="min-h-screen w-full flex items-center justify-center">
             <Loader />
         </div>
     ) : (

@@ -275,7 +275,6 @@ export default function HomePage({ dictionary }: any) {
                     </ul>
                 </section>
             </main>
-
             <div>
                 <ShareModal
                     dictionary={dictionary}
