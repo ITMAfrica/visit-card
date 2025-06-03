@@ -89,7 +89,7 @@ export default function HomePage({ dictionary }: any) {
                     height={156}
                 />}
                 <section>
-                    <h1 id="name">
+                    <h1 id="name" className='font-bold'>
                         {`${user?.firstName} ${user?.name}` ||
                             'Precieux Mudibu'}
                     </h1>
@@ -133,7 +133,7 @@ export default function HomePage({ dictionary }: any) {
             </header>
             <main>
                 <section>
-                    <h2>{dictionary.about}</h2>
+                    <h2 className='font-bold'>{dictionary.about}</h2>
                     <p id="description">{user?.description}</p>
                     <ul>
                         <li>
@@ -163,7 +163,6 @@ export default function HomePage({ dictionary }: any) {
                         {user?.contract && (
                             <li>
                                 <Image alt="profile" src={building} />
-
                                 <a
                                     id="professionalPhoneNumber"
                                     href={`${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}`}
@@ -232,7 +231,7 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2>{dictionary.services}</h2>
+                    <h2 className='font-bold'>{dictionary.services}</h2>
                     <p>{dictionary.servicesDetailsParagraph1}</p>
                     <p>
                         {dictionary.servicesDetailsParagraph2}
@@ -245,7 +244,7 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2>{dictionary.documents}</h2>
+                    <h2 className='font-bold'>{dictionary.documents}</h2>
                     <ul>
                         {documents?.map((document: any, index: number) => (
                             <li key={index} className="w-full">
