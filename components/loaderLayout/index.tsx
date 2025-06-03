@@ -9,6 +9,8 @@ export default function LoaderLayout({
             <Loader />
         </div>
     ) : (
-        children
+        <div className="w-full lg:w-[420px] h-full mx-auto">
+            {children}
+        </div>
     );
 }
