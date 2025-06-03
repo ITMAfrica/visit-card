@@ -7,7 +7,7 @@ export default async function Home({ params }: any) {
 
     return (
         <Suspense>
-            <HomePage dictionary={dictionary} />;
+            <HomePage dictionary={dictionary} />
         </Suspense>
     );
 }

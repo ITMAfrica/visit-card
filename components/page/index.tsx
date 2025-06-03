@@ -65,6 +65,7 @@ export default function HomePage({ dictionary }: any) {
                 setLoaderStatusVisibility(false);
             });
     }, []);
+    console.log(coverPhoto.height, coverPhoto.width);
 
     if (!user) return <div className="w-full"></div>
     return (

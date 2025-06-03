@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { MdShare } from 'react-icons/md';
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -51,14 +50,12 @@ export default function ShareModal({ dictionary, isOpen, closeModal }: any) {
                         <FacebookShareButton url={linkToShare}>
                             <FacebookIcon size={45} round />
                         </FacebookShareButton>
-
                         <TwitterShareButton url={linkToShare}>
                             <TwitterIcon size={45} round />
                         </TwitterShareButton>
                         <LinkedinShareButton url={linkToShare}>
                             <LinkedinIcon size={45} round />
                         </LinkedinShareButton>
-
                         <WhatsappShareButton url={linkToShare}>
                             <WhatsappIcon size={45} round />
                         </WhatsappShareButton>
