@@ -191,7 +191,7 @@ export default function HomePage({ dictionary }: any) {
                             </li>
                         )}
                     </ul>
-                    <div>
+                    {/* <div>
                         <a
                             target="_blank"
                             id="linkedin"
@@ -228,7 +228,7 @@ export default function HomePage({ dictionary }: any) {
                                 height={25}
                             />
                         </a>
-                    </div>
+                    </div> */}
                 </section>
 
                 <section>
