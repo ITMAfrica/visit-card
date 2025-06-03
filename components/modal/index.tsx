@@ -26,12 +26,12 @@ export default function ModalContainer({
                         }}
                     >
                         <div
-                            className="absolute top-4 right-4 rounded-full bg-gray-500 text-white p-1 text-black text-sm hover:cursor-pointer"
+                            className="absolute top-4 right-4 cursor-pointer rounded-full bg-gray-500 text-white p-1 text-black text-sm hover:cursor-pointer"
                             onClick={onClick}
                         >
                             <RxCross2 />
                         </div>
-                        <div className="w-full h-full py-8">{children}</div>
+                        <div className="w-full h-full py-4">{children}</div>
                     </div>
                 </div>
             </div>
