@@ -20,9 +20,6 @@
 }
 
 body {
-    width: 420px;
-    height: 100%;
-    margin: 0 auto;
     background-color: #e5e5e5;
 }
 
@@ -73,9 +70,7 @@ header {
 
 .profilePicture {
     display: block;
-    margin: 40px auto 0 auto;
-    height: 118.5px;
-    width: 118.5px;
+    margin: 55px auto 0 auto;
     border-radius: 100%;
     border: 3px solid #FFFFFF;
 }
