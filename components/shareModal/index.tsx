@@ -12,17 +12,21 @@ import {
 } from 'next-share';
 import { copyLink } from '@/helpers';
 import ModalContainer from '../modal';
-import { useSearchParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 
 export default function ShareModal({ dictionary, isOpen, closeModal }: any) {
     const [copied, setCopied] = useState(false);
     const searchParams = useSearchParams();
-    const lang = searchParams.get('lang');
+    const params = useParams();
+    const lang = params?.lang || 'fr';
     const id = searchParams.get('id');
 
-    const [linkToShare, setLinkToShare] = useState(
-        `${process?.env?.NEXT_PUBLIC_PROJECT_URL}?lang=${lang}&id=${id}`
-    );
+    const [linkToShare, setLinkToShare] = useState(window.location.href);
+    useEffect(function () {
+        setLinkToShare(
+            `${window.location.href}`
+        );
+    }, [lang, id]);
 
     return (
         <>

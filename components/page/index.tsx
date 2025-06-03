@@ -2,7 +2,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from 'next/image';
 import coverPhoto from '@/public/images/coverPhoto.png';
-import profilePicture from '@/public/images/profilePicture.png';
 import contact from '@/public/images/contact.png';
 import share from '@/public/images/share.png';
 import phone from '@/public/images/phone.png';
@@ -15,7 +14,7 @@ import linkedin from '@/public/images/linkedin.png';
 import facebook from '@/public/images/facebook.png';
 import instagram from '@/public/images/instagram.png';
 import africa from '@/public/images/africa.png';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
 import { getUserInKaziPro } from '@/helpers';
@@ -43,12 +42,10 @@ export default function HomePage({ dictionary }: any) {
         }
     ];
 
-    console.log('USER', user);
     useEffect(() => {
         getUserInKaziPro(id)
             .then(async (response: any) => {
                 setUser(response?.data);
-
                 const vcard =
                     'BEGIN:VCARD\nVERSION:4.0\nFN:' +
                     `${response?.data.firstName} ${response?.data.name}` +
@@ -69,6 +66,7 @@ export default function HomePage({ dictionary }: any) {
             });
     }, []);
 
+    if (!user) return <div className="w-full"></div>
     return (
         <LoaderLayout loaderStatusVisibility={loaderStatusVisibility}>
             <header>
@@ -79,17 +77,17 @@ export default function HomePage({ dictionary }: any) {
                     width={404}
                     height={102}
                 />
-                <Image
+                {<Image
                     alt="profile"
                     id="picture"
                     className="profilePicture h-[113px] w-[113px] object-contain bg-white"
                     src={
                         user?.picture ||
-                        'https://www.itmafrica.com/_next/image?url=https%3A%2F%2Fitmafrica.blob.core.windows.net%2Ftest%2FLogo_RDC.png&w=128&q=75'
+                        'https://www.itmafrica.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcd.38a5bff4.png&w=256&q=75'
                     }
                     width={148}
                     height={156}
-                />
+                />}
                 <section>
                     <h1 id="name">
                         {`${user?.firstName} ${user?.name}` ||
@@ -104,7 +102,6 @@ export default function HomePage({ dictionary }: any) {
                         {user?.countryAccesses ? user?.countryAccesses : 'ITM'}
                     </h3>
                 </section>
-
                 <section className="headerButtons">
                     <a
                         id="saveButton"
@@ -132,7 +129,6 @@ export default function HomePage({ dictionary }: any) {
                         </span>
                     </a>
                 </section>
-
                 <Image alt="profile" className="africa" src={africa} />
             </header>
             <main>
@@ -142,7 +138,6 @@ export default function HomePage({ dictionary }: any) {
                     <ul>
                         <li>
                             <Image alt="profile" src={globIcon} />
-
                             <a
                                 href="https://www.itmafrica.com/"
                                 target="_blank"
@@ -196,8 +191,7 @@ export default function HomePage({ dictionary }: any) {
                             </li>
                         )}
                     </ul>
-
-                    <div>
+                    {/* <div>
                         <a
                             target="_blank"
                             id="linkedin"
@@ -234,7 +228,7 @@ export default function HomePage({ dictionary }: any) {
                                 height={25}
                             />
                         </a>
-                    </div>
+                    </div> */}
                 </section>
 
                 <section>
