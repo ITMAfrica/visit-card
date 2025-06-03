@@ -89,7 +89,7 @@ export default function HomePage({ dictionary }: any) {
                     height={156}
                 />}
                 <section>
-                    <h1 id="name">
+                    <h1 id="name" className='font-bold'>
                         {`${user?.firstName} ${user?.name}` ||
                             'Precieux Mudibu'}
                     </h1>
@@ -133,7 +133,7 @@ export default function HomePage({ dictionary }: any) {
             </header>
             <main>
                 <section>
-                    <h2>{dictionary.about}</h2>
+                    <h2 className='font-bold'>{dictionary.about}</h2>
                     <p id="description">{user?.description}</p>
                     <ul>
                         <li>
@@ -150,8 +150,9 @@ export default function HomePage({ dictionary }: any) {
                                 <Image alt="profile" src={phone} />
                                 <a
                                     id="phoneNumber"
+                                    target='_blank'
                                     href={
-                                        `+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
+                                        `tel:+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
                                         '+243979544988'
                                     }
                                 >
@@ -163,10 +164,10 @@ export default function HomePage({ dictionary }: any) {
                         {user?.contract && (
                             <li>
                                 <Image alt="profile" src={building} />
-
                                 <a
                                     id="professionalPhoneNumber"
-                                    href={`${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}`}
+                                    target='_blank'
+                                    href={`tel:${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}`}
                                 >
                                     {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
                                         '+243979544988'}
@@ -176,7 +177,9 @@ export default function HomePage({ dictionary }: any) {
                         {user?.email && (
                             <li>
                                 <Image alt="profile" src={email} />
-                                <a id="email" href={user?.email}>
+                                <a id="email"
+                                    target='_blank'
+                                    href={`mailto:${user?.email}`}>
                                     {user?.email || 'precieux@gmail.com'}
                                 </a>
                             </li>
@@ -232,7 +235,7 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2>{dictionary.services}</h2>
+                    <h2 className='font-bold'>{dictionary.services}</h2>
                     <p>{dictionary.servicesDetailsParagraph1}</p>
                     <p>
                         {dictionary.servicesDetailsParagraph2}
@@ -245,7 +248,7 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2>{dictionary.documents}</h2>
+                    <h2 className='font-bold'>{dictionary.documents}</h2>
                     <ul>
                         {documents?.map((document: any, index: number) => (
                             <li key={index} className="w-full">
