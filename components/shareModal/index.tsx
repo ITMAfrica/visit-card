@@ -30,14 +30,14 @@ export default function ShareModal({ dictionary, isOpen, closeModal }: any) {
     return (
         <>
             <ModalContainer
-                classNames="h-fit w-54"
+                classNames="h-fit w-11/12 lg:w-[420px]"
                 isOpen={isOpen}
                 onClick={() => {
                     closeModal();
                 }}
             >
                 <div
-                    className="h-5/6 relative sm:h-2/5 bg-white overflow-x-hidden py-6 px-16 text-black rounded-[14px] relative animate__animated animate__slideInDown"
+                    className="h-5/6 relative sm:h-2/5 bg-white overflow-x-hidden py-6 px-6 text-black rounded-[14px] relative animate__animated animate__slideInDown"
                     onClick={e => {
                         e.stopPropagation();
                     }}
@@ -45,7 +45,6 @@ export default function ShareModal({ dictionary, isOpen, closeModal }: any) {
                     <h1 className="text-lg font-bold">
                         {dictionary?.shareContact}
                     </h1>
-
                     <div className="mt-4 mb-6 flex items-center justify-between">
                         <FacebookShareButton url={linkToShare}>
                             <FacebookIcon size={45} round />
