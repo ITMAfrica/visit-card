@@ -18,6 +18,7 @@ export async function generateMetadata(params: any) {
             picture = response?.picture ||
                 'https://www.itmafrica.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcd.38a5bff4.png&w=256&q=75'
         })
+        
     return {
         icon: picture,
         images: [{ url: picture }],
