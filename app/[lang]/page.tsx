@@ -18,22 +18,22 @@ export async function generateMetadata(params: any) {
             picture = response?.picture ||
                 'https://www.itmafrica.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcd.38a5bff4.png&w=256&q=75'
         })
-        
+
     return {
         icon: picture,
-        images: [{ url: picture }],
+        images: [{ url: picture, height: 100, width: 100 }],
         title: 'Carte de visite : ' + title,
         description,
         openGraph: {
             title: 'Carte de visite : ' + title,
             description,
             type: 'article',
-            images: [{ url: picture }],
+            images: [{ url: picture, height: 100, width: 100 }]
         },
     };
 }
 export default async function Home({ params }: any) {
-    const dictionary = await getDictionary(params?.lang || 'en');
+    const dictionary = await getDictionary(params?.lang || 'fr');
 
     return (
         <Suspense>

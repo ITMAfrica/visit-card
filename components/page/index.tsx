@@ -277,6 +277,15 @@ export default function HomePage({ dictionary }: any) {
                     </ul>
                 </section>
             </main>
+            {user.id == 8778 && <div className="w-full h-[100px] relative">
+                <Image
+                    alt="profile"
+                    className='w-full bg-contain'
+                    src={"https://itmafrica.blob.core.windows.net/bannieres-2025/Baniere_Holding.gif"}
+                    width={400}
+                    height={100}
+                />
+            </div>}
             <div>
                 <ShareModal
                     dictionary={dictionary}
