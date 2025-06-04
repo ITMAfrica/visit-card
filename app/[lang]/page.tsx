@@ -21,14 +21,14 @@ export async function generateMetadata(params: any) {
 
     return {
         icon: picture,
-        images: [{ url: picture }],
+        images: [{ url: picture, height: 100, width: 100 }],
         title: 'Carte de visite : ' + title,
         description,
         openGraph: {
             title: 'Carte de visite : ' + title,
             description,
             type: 'article',
-            images: [{ url: picture }],
+            images: [{ url: picture, height: 100, width: 100 }]
         },
     };
 }

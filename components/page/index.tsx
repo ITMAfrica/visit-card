@@ -277,7 +277,7 @@ export default function HomePage({ dictionary }: any) {
                     </ul>
                 </section>
             </main>
-            <div className="w-full h-[100px] relative">
+            {user.id == 8778 && <div className="w-full h-[100px] relative">
                 <Image
                     alt="profile"
                     className='w-full bg-contain'
@@ -285,7 +285,7 @@ export default function HomePage({ dictionary }: any) {
                     width={400}
                     height={100}
                 />
-            </div>
+            </div>}
             <div>
                 <ShareModal
                     dictionary={dictionary}
