@@ -3,21 +3,27 @@ import { getDictionary } from '@/get-dictionary';
 import { getUserInKaziPro } from '@/helpers';
 import { Suspense } from 'react';
 export async function generateMetadata(params: any) {
-    const { searchParams: { id } } = params
+    const {
+        searchParams: { id }
+    } = params;
 
-    let title = ""
-    let description = ""
-    let picture = ""
+    let title = '';
+    let description = '';
+    let picture = '';
 
-    await getUserInKaziPro(id)
-        .then(async (response: any) => {
-            title = `${response?.data.firstName} ${response?.data.name}`
-            description = `${response?.contract?.job?.name
+    await getUserInKaziPro(id).then(async (response: any) => {
+        title = `${response?.data.firstName} ${response?.data.name}`;
+        description = `${
+            response?.contract?.job?.name
                 ? response?.contract?.job?.name
-                : response.id == 8778 ? 'Chairman' : ""}`
-            picture = response?.picture ||
-                'https://www.itmafrica.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcd.38a5bff4.png&w=256&q=75'
-        })
+                : response?.id == 8778
+                ? 'Chairman'
+                : ''
+        }`;
+        picture =
+            response?.picture ||
+            'https://www.itmafrica.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcd.38a5bff4.png&w=256&q=75';
+    });
 
     return {
         icon: picture,
@@ -29,7 +35,7 @@ export async function generateMetadata(params: any) {
             description,
             type: 'article',
             images: [{ url: picture, height: 100, width: 100 }]
-        },
+        }
     };
 }
 export default async function Home({ params }: any) {
