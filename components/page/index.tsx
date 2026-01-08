@@ -14,8 +14,8 @@ import linkedin from '@/public/images/linkedin.png';
 import facebook from '@/public/images/facebook.png';
 import instagram from '@/public/images/instagram.png';
 import africa from '@/public/images/africa.png';
-import banner from "@/public/images/banner.jpg";
-import carte from "@/public/images/carteITm.jpg";
+import banner from '@/public/images/banner.jpg';
+import carte from '@/public/images/carteITm.jpg';
 import { useEffect, useState } from 'react';
 import ShareModal from '@/components/shareModal';
 import { useSearchParams } from 'next/navigation';
@@ -68,10 +68,10 @@ export default function HomePage({ dictionary }: any) {
             });
     }, []);
 
-    if (!user) return <div className="w-full"></div>
+    if (!user) return <div className="w-full"></div>;
     return (
         <LoaderLayout loaderStatusVisibility={loaderStatusVisibility}>
-            <header className='border w-full overflow-hidden relative'>
+            <header className="border w-full overflow-hidden relative">
                 <Image
                     alt="profile"
                     className="coverPhoto object-cover"
@@ -79,7 +79,13 @@ export default function HomePage({ dictionary }: any) {
                     width={404}
                     height={100}
                 />
-                <Image alt="profile" className=" absolute top-[105px] -right-3" src={carte} height={140} width={140} />
+                <Image
+                    alt="profile"
+                    className=" absolute top-[105px] -right-3"
+                    src={carte}
+                    height={140}
+                    width={140}
+                />
                 <Image
                     alt="profile"
                     id="picture"
@@ -92,14 +98,15 @@ export default function HomePage({ dictionary }: any) {
                     height={100}
                 />
                 <section>
-                    <h1 id="name" className='font-bold'>
-                        {`${user?.firstName} ${user?.name}` ||
-                            ''}
+                    <h1 id="name" className="font-bold">
+                        {`${user?.firstName} ${user?.name}` || ''}
                     </h1>
-                    <h2 id="position" className='font-medium'>
+                    <h2 id="position" className="font-medium">
                         {user?.contract?.job?.name
                             ? user?.contract?.job?.name
-                            : user.id == 8778 ? 'Chairman' : ""}
+                            : user.id == 8778
+                            ? 'Chairman'
+                            : ''}
                     </h2>
                     <h3 id="countryAccess">
                         {user?.countryAccesses ? user?.countryAccesses : ''}
@@ -117,7 +124,9 @@ export default function HomePage({ dictionary }: any) {
                             width={15}
                             height={15}
                         />
-                        <span className='lg:text-sm text-xs'>{dictionary.addToContact}</span>
+                        <span className="lg:text-sm text-xs">
+                            {dictionary.addToContact}
+                        </span>
                     </a>
 
                     <a>
@@ -127,8 +136,9 @@ export default function HomePage({ dictionary }: any) {
                             width={15}
                             height={15}
                         />
-                        <span onClick={() => setModalIsOpen(true)}
-                            className='lg:text-sm text-xs'
+                        <span
+                            onClick={() => setModalIsOpen(true)}
+                            className="lg:text-sm text-xs"
                         >
                             {dictionary.shareContact}
                         </span>
@@ -137,14 +147,14 @@ export default function HomePage({ dictionary }: any) {
             </header>
             <main>
                 <section>
-                    <h2 className='font-bold'>{dictionary.about}</h2>
+                    <h2 className="font-bold">{dictionary.about}</h2>
                     <p id="description">{user?.description}</p>
-                    <ul >
+                    <ul>
                         <li>
                             <Image alt="profile" src={globIcon} />
                             <a
                                 href="https://www.itmafrica.com/"
-                                className='hover:font-bold'
+                                className="hover:font-bold"
                                 target="_blank"
                             >
                                 www.itmafrica.com
@@ -155,8 +165,8 @@ export default function HomePage({ dictionary }: any) {
                                 <Image alt="profile" src={phone} />
                                 <a
                                     id="phoneNumber"
-                                    target='_blank'
-                                    className='hover:font-bold'
+                                    target="_blank"
+                                    className="hover:font-bold"
                                     href={
                                         `tel:+${user?.telephoneAreaCode}${user?.phoneNumber}` ||
                                         '+243979544988'
@@ -172,8 +182,8 @@ export default function HomePage({ dictionary }: any) {
                                 <Image alt="profile" src={building} />
                                 <a
                                     id="professionalPhoneNumber"
-                                    target='_blank'
-                                    className='hover:font-bold'
+                                    target="_blank"
+                                    className="hover:font-bold"
                                     href={`tel:${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}`}
                                 >
                                     {`+${user?.contract?.telephoneAreaCode}${user?.contract?.phoneNumber}` ||
@@ -184,20 +194,24 @@ export default function HomePage({ dictionary }: any) {
                         {user?.email && (
                             <li>
                                 <Image alt="profile" src={email} />
-                                <a id="email"
-                                    className='hover:font-bold'
-                                    target='_blank'
-                                    href={`mailto:${user?.email}`}>
+                                <a
+                                    id="email"
+                                    className="hover:font-bold"
+                                    target="_blank"
+                                    href={`mailto:${user?.email}`}
+                                >
                                     {user?.email || 'precieux@gmail.com'}
                                 </a>
                             </li>
                         )}
-                        {user?.address && (
+                        {user?.organisationCity?.generalDirectionAddress && (
                             <li>
                                 <Image alt="profile" src={localisation} />
                                 <a id="address">
                                     {' '}
-                                    {user?.address || 'precieux@gmail.com'}
+                                    {user?.organisationCity
+                                        ?.generalDirectionAddress ||
+                                        'precieux@gmail.com'}
                                 </a>
                             </li>
                         )}
@@ -243,7 +257,7 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2 className='font-bold'>{dictionary.services}</h2>
+                    <h2 className="font-bold">{dictionary.services}</h2>
                     <p>{dictionary.servicesDetailsParagraph1}</p>
                     <p>
                         {dictionary.servicesDetailsParagraph2}
@@ -256,7 +270,7 @@ export default function HomePage({ dictionary }: any) {
                 </section>
 
                 <section>
-                    <h2 className='font-bold'>{dictionary.documents}</h2>
+                    <h2 className="font-bold">{dictionary.documents}</h2>
                     <ul>
                         {documents?.map((document: any, index: number) => (
                             <li key={index} className="w-full">
@@ -277,15 +291,19 @@ export default function HomePage({ dictionary }: any) {
                     </ul>
                 </section>
             </main>
-            {user.id == 8778 && <div className="w-full h-[100px] relative">
-                <Image
-                    alt="profile"
-                    className='w-full bg-contain'
-                    src={"https://itmafrica.blob.core.windows.net/bannieres-2025/Baniere_Holding.gif"}
-                    width={400}
-                    height={100}
-                />
-            </div>}
+            {user.id == 8778 && (
+                <div className="w-full h-[100px] relative">
+                    <Image
+                        alt="profile"
+                        className="w-full bg-contain"
+                        src={
+                            'https://itmafrica.blob.core.windows.net/bannieres-2025/Baniere_Holding.gif'
+                        }
+                        width={400}
+                        height={100}
+                    />
+                </div>
+            )}
             <div>
                 <ShareModal
                     dictionary={dictionary}
